@@ -75,6 +75,6 @@ class Handler extends ExceptionHandler
             return redirect()->guest(route('admin.login'));
         }
 
-        return redirect()->guard(route('login'));
+        return redirect()->guest(route('login'));
     }
 }
