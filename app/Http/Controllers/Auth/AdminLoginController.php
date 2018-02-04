@@ -40,6 +40,6 @@ class AdminLoginController extends Controller
         }
 
         // 4) If unsuccessful, then redirect back to login form
-        return redirect()->back()->withInput($credentials);
+        return redirect()->back()->withInput($request->only('login', 'remember'));
     }
 }
