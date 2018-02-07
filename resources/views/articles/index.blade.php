@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Articles</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
 <div class="container">
-
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ url('articles') }}">Blog</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="{{ url('articles') }}">View All Articles</a></li>
-            <li><a href="{{ url('articles/create') }}">Create a Article</a>
-        </ul>
-    </nav>
-
-    <h1>Articles</h1>
-
+    <div class="text-center">
+        <h1>Articles</h1>
+    </div>
     <!-- will be used to show any messages -->
     @if (session('status'))
         <div class="alert alert-info">
@@ -26,33 +12,31 @@
         </div>
     @endif
 
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>Title</td>
-            <td>Body</td>
-            <td>Created</td>
-            <td>Last changed</td>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($articles as $key => $value)
-            <tr>
-                <td>{{ $value->id }}</td>
-                <td>{{ $value->title }}</td>
-                <td>{{ $value->body }}</td>
-                <td>{{ $value->created_at }}</td>
-                <td>{{ $value->updated_at }}</td>
-                <td>
-                    <a class="btn btn-small btn-success" href="{{ url('articles/' . $value->id) }}">Show this Article</a>
-                    <a class="btn btn-small btn-info" href="{{ url('articles/' . $value->id . '/edit') }}">Edit this Article</a>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <th>№</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Created at</th>
+                <th>Updated at</th>
+            </thead>
 
+            <tbody>
+                @foreach($articles as $article)
+                <tr>
+                    <td>{{ $article->id }}</td>
+                    <td>{{ $article->title }}</td>
+                    <td>{{ $article->body }}</td>
+                    <td>{{ $article->created_at }}</td>
+                    <td>{{ $article->updated_at }}</td>
+                    <td>
+                        <a href="{{ route('articles.show', $article->id) }}" class="btn btn-default btn-sm">See</a>
+                        <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-default btn-sm">Edit</a>
+                    </td>
+                    @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
-</body>
-</html>
+@endsection

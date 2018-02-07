@@ -1,25 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Articles</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
+@extends('layouts.app')
 
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ url('articles') }}">Blog</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="{{ url('articles') }}">View All Articles</a></li>
-            <li><a href="{{ url('articles/create') }}">Create a Article</a>
-        </ul>
-    </nav>
+@section('content')
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>Create a Article</h1>
+        <hr>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-    <h1>Create a Article</h1>
-    
-
+        {!! Form::open(['route' => 'articles.store']) !!}
+            {{ Form::label('title', 'Title: ') }}
+            {{ Form::text('title', null, ['class' => 'form-control']) }}
+            {{ Form::label('body', 'Body: ') }}
+            {{ Form::textarea('body', null, ['class' => 'form-control']) }}
+            {{ Form::submit('Create Article', ['class' => 'btn btn-success btn-lg', 'style' => 'margin-top: 15px;']) }}
+        {!! Form::close() !!}
+    </div>
 </div>
-</body>
-</html>
+@endsection
