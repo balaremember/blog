@@ -1,17 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="row">
     <div class="text-center">
         <h1>Articles</h1>
     </div>
-    <!-- will be used to show any messages -->
-    @if (session('status'))
-        <div class="alert alert-info">
-            {{ session('status') }}
-        </div>
-    @endif
-
+</div>
+<div class="row">
     <div class="col-md-12">
         <table class="table">
             <thead>
@@ -19,7 +14,6 @@
                 <th>Title</th>
                 <th>Body</th>
                 <th>Created at</th>
-                <th>Updated at</th>
             </thead>
 
             <tbody>
@@ -27,13 +21,13 @@
                 <tr>
                     <td>{{ $article->id }}</td>
                     <td>{{ $article->title }}</td>
-                    <td>{{ $article->body }}</td>
-                    <td>{{ $article->created_at }}</td>
-                    <td>{{ $article->updated_at }}</td>
+                    <td>{{ substr($article->body, 0, 50) }}{{ strlen($article->body) > 50 ? "..." : "" }}</td>
+                    <td>{{ date('M j, Y', strtotime($article->created_at)) }}</td>
                     <td>
-                        <a href="{{ route('articles.show', $article->id) }}" class="btn btn-default btn-sm">See</a>
-                        <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-default btn-sm">Edit</a>
+                        <a href="{{ route('articles.show', $article->id) }}" class="btn btn-default">See</a>
+                        <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-default">Edit</a>
                     </td>
+                </tr>
                     @endforeach
             </tbody>
         </table>

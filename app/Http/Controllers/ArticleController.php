@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreBlogArticle;
+use App\Http\Requests\UpdateBlogArticle;
 
 class ArticleController extends Controller
 {
@@ -127,9 +128,16 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBlogArticle $request, $id)
     {
-        //
+        $article = Article::find($id);
+        $article->title = $request->input('title');
+        $article->body = $request->input('body');
+
+        $article->save();
+
+        Session::flash('status', 'Article updated!');
+        return redirect()->route('articles.show', $article->id);
     }
 
     /**
@@ -140,6 +148,19 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+            $user = Auth::user();
+            $article = Article::find($id);
+
+            if($user->can('delete', $article))
+            {
+                $article->delete();
+
+                Session::flash('status', 'Article deleted!');
+                return redirect()->route('articles.index');
+
+            } else {
+                return view('errors.403');
+
+            }
     }
 }
