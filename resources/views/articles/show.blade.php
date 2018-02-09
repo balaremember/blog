@@ -38,5 +38,22 @@
 
 			</div>
 		</div>
-    </div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">Comments</h3>
+			<hr>
+			@foreach($article->comments as $comment)
+				<dl class="dl-horizontal">
+					<dt>Created At:</dt>
+					<dd>{{ date('M j, Y h:ia', strtotime($comment->created_at)) }}</dd>
+				</dl>
+					
+				<p class="lead">
+					<span>{{ $comment->body }}</span>
+				</p>
+			@endforeach
+		</div>
+	</div>
 @endsection

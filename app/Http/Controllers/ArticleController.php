@@ -18,7 +18,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(15);
 
         return view('articles.index')->with('articles', $articles);
     }
@@ -88,7 +88,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Article::find($id);
+        $article = Article::with('comments')->find($id);
 
         return view('articles.show')->with('article', $article);
     }

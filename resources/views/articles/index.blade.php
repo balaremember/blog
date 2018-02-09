@@ -28,9 +28,13 @@
                         <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-default">Edit</a>
                     </td>
                 </tr>
-                    @endforeach
+                @endforeach
             </tbody>
         </table>
     </div>
+</div>
+
+<div class="row">
+    {{ $articles->links() }}
 </div>
 @endsection
