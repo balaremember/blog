@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Comment;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Article::class, function (Faker $faker) {
+$factory->define(App\Comment::class, function (Faker $faker) {
     return [
-        'user_id' => $faker->numberBetween($min = 2, $max = 49),
-        'title' => $faker->sentence($nbWords = 3, $variableNbWords = true),
+        'article_id' => $faker->numberBetween($min = 1, $max = 100),
         'body' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
     ];
 });

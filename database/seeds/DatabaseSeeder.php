@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Users created!');
         $this->call(ArticlesTableSeeder::class);
         $this->command->info('Articles created!');
+        $this->call(CommentTableSeeder::class);
+        $this->command->info('Comments created!');
     }
 }
