@@ -2,12 +2,11 @@
 
 namespace App\Listeners\User;
 
-use Log;
-use App\Events\UserAddEvent;
+use App\Events\NewUser;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AddListener
+class SendWelcomeEmail
 {
     /**
      * Create the event listener.
@@ -22,11 +21,11 @@ class AddListener
     /**
      * Handle the event.
      *
-     * @param  UserAddEvent  $event
+     * @param  NewUser  $event
      * @return void
      */
-    public function handle(UserAddEvent $event)
+    public function handle(NewUser $event)
     {
-        Log::info('New User registred', $event->user->name);
+        //
     }
 }
