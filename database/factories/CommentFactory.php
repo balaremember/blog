@@ -17,6 +17,7 @@ use App\Comment;
 $factory->define(App\Comment::class, function (Faker $faker) {
     return [
         'article_id' => $faker->numberBetween($min = 1, $max = 100),
+        'user_id' => $faker->numberBetween($min = 1, $max = 100),
         'body' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
     ];
 });

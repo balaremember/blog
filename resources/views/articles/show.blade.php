@@ -48,6 +48,7 @@
 				<dl class="dl-horizontal">
 					<dt>Created At:</dt>
 					<dd>{{ date('M j, Y h:ia', strtotime($comment->created_at)) }}</dd>
+					<!-- <dd>{{  }}</dd>	 -->
 				</dl>
 					
 				<p class="lead">
