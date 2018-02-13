@@ -9,6 +9,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $dispatchesEvents = [
+        'created' => Events\NewUser::class
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
