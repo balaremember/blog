@@ -11,6 +11,12 @@ use App\Http\Requests\UpdateBlogArticle;
 
 class ArticleController extends Controller
 {
+
+    public function __construct() 
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(15);
+        $articles = Article::orderBy('id', 'desc')->paginate(15);
 
         return view('articles.index')->with('articles', $articles);
     }

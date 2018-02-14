@@ -29,3 +29,4 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::resource('articles', 'ArticleController');
+Route::resource('categories', 'CategoryController', ['except' => ['create']]);

@@ -5,9 +5,9 @@
     <div class="row">
 
         <div class="col-md-8">
+			<p class="lead">Category: {{ $article->category->name }}</p>
             <h2>{{ $article->title }}</h2>
-
-            <p class="lead">{{ $article->body }}</p>
+			<p class="lead">{{ $article->body }}</p>
         </div>
 
         <div class="col-md-4">
@@ -48,7 +48,7 @@
 				<dl class="dl-horizontal">
 					<dt>Created At:</dt>
 					<dd>{{ date('M j, Y h:ia', strtotime($comment->created_at)) }}</dd>
-					<!-- <dd>{{  }}</dd>	 -->
+					
 				</dl>
 					
 				<p class="lead">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserIdToCommentsTable extends Migration
+class AddCategoryIdToArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddUserIdToCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->integer('user_id')->after('article_id')->unsigned();
+        Schema::table('articles', function (Blueprint $table) {
+            $table->integer('category_id')->nullable()->after('user_id')->unsigned();
         });
     }
 
@@ -25,8 +25,8 @@ class AddUserIdToCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropColumn('category_id');
         });
     }
 }
