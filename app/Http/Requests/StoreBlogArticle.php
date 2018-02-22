@@ -26,6 +26,7 @@ class StoreBlogArticle extends FormRequest
     {
         return [
             'title' => 'bail|required|max:32',
+            'category_id' => 'required',
             'body' => 'required'
         ];
     }

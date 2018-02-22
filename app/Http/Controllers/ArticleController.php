@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreBlogArticle;
 use App\Http\Requests\UpdateBlogArticle;
+use App\Category;
 
 class ArticleController extends Controller
 {
@@ -36,13 +37,15 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
+        
         if(Auth::check())
         {
             $user = Auth::user();
 
             if($user->can('create', Article::class))
             {
-               return view('articles.create');
+               return view('articles.create')->with('categories', $categories);
 
             } else {
                 return view('errors.403');
@@ -71,6 +74,7 @@ class ArticleController extends Controller
         {
             $article = new Article([
                 'user_id' => Auth::id(),
+                'category_id' => $request->input('category_id'),
                 'title' => $request->input('title'),
                 'body' => $request->input('body')
             ]);
