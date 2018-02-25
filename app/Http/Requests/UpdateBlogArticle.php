@@ -28,6 +28,7 @@ class UpdateBlogArticle extends FormRequest
     {
         return [
             'title' => 'bail|required|max:32',
+            'category_id' => 'required|integer',
             'body' => 'required'
         ];
     }

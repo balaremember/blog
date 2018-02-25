@@ -72,13 +72,11 @@ class ArticleController extends Controller
 
         if($user->can('create', Article::class))
         {
-            $article = new Article([
-                'user_id' => Auth::id(),
-                'category_id' => $request->input('category_id'),
-                'title' => $request->input('title'),
-                'body' => $request->input('body')
-            ]);
-
+            $article = new Article();
+            $article->user_id = Auth::id();
+            $article->category_id = $request->input('category_id');
+            $article->title = $request->input('title');
+            $article->body = $request->input('body');
             $article->save();
 
             Session::flash('status', 'New Article created!');
@@ -114,11 +112,16 @@ class ArticleController extends Controller
         if(Auth::check())
         {
             $user = Auth::user();
+            $categories = Category::all();
             $article = Article::find($id);
+            $catArray = [];
+            foreach ($categories as $category) {
+                $catArray[$category->id] = $category->name;
+            }
 
             if($user->can('update', $article))
             {
-               return view('articles.edit')->with('article', $article);
+               return view('articles.edit')->with('article', $article)->with('categories', $catArray);
 
             } else {
                 return view('errors.403');
@@ -141,9 +144,9 @@ class ArticleController extends Controller
     public function update(UpdateBlogArticle $request, $id)
     {
         $article = Article::find($id);
+        $article->category_id = $request->input('category_id');
         $article->title = $request->input('title');
         $article->body = $request->input('body');
-
         $article->save();
 
         Session::flash('status', 'Article updated!');

@@ -5,7 +5,7 @@
     <div class="row">
 
         <div class="col-md-8">
-			<p class="lead">Category: {{ $article->category }}</p>
+			<p class="lead">Category: {{ $article->category->name }}</p>
             <h2>{{ $article->title }}</h2>
 			<p class="lead">{{ $article->body }}</p>
         </div>
