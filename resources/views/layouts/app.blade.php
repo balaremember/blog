@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('stylesheets')
 </head>
 <body>
     <div id="app">
@@ -39,6 +40,7 @@
                         <li><a href="{{ route('articles.index') }}">View All Articles</a></li>
                         <li><a href="{{ route('articles.create') }}">Create a Article</a></li>
                         <li><a href="{{ route('categories.index')}}">Categories</a></li>
+                        <li><a href="{{ route('tags.index')}}">Tags</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -80,5 +82,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

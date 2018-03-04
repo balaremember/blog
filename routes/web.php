@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,4 @@ Route::prefix('admin')->group(function () {
 
 Route::resource('articles', 'ArticleController');
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
+Route::resource('tags', 'TagController', ['except' => ['create']]);

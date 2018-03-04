@@ -8,7 +8,14 @@
 			<p class="lead">Category: {{ $article->category->name }}</p>
             <h2>{{ $article->title }}</h2>
 			<p class="lead">{{ $article->body }}</p>
-        </div>
+			
+			<hr>
+			<div class="tags">
+				@foreach($article->tags as $tag)
+					<span class="label label-default">{{ $tag->name }}</span>
+				@endforeach
+			</div>
+		</div>
 
         <div class="col-md-4">
 			<div class="well">

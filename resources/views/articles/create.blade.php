@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+    {!! Html::style('css/select2.min.css') !!}
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -17,6 +21,13 @@
                 @endforeach
             </select>
             
+            {{ Form::label('tags', 'Tag: ') }}
+            <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+                @foreach($tags as $tag)
+                    <option value='{{ $tag->id }}'> {{ $tag->name }} </option>
+                @endforeach
+            </select>
+
             {{ Form::label('body', 'Body: ') }}
             {{ Form::textarea('body', null, ['class' => 'form-control']) }}
             
@@ -24,4 +35,12 @@
         {!! Form::close() !!}
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    {!! Html::script('js/select2.min.js') !!}
+
+    <script type="text/javascript">
+        $('.select2-multi').select2();
+    </script>
 @endsection
