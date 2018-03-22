@@ -56,12 +56,6 @@ class TagController extends Controller
         Session::flash('status', 'New Tag created');
     
         return redirect()->route('tags.index');
-        // $tag = new Tag();
-        // $tag->name = $request->name;
-        // $tag->save();
-
-        // Session::flash('status', 'New Tag created!');
-        // return redirect()->route('tags.index');
     }
 
     /**
@@ -72,7 +66,8 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        $tag = Tag::find($id);
+        return view('tags.show')->withTag($tag);   //or with('tag', $tag);
     }
 
     /**
@@ -83,7 +78,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+        return view('tags.edit')->withTag($tag);
     }
 
     /**
@@ -93,9 +89,14 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBlogTag $request, $id)
+    public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+        $this->validate($request, ['name' => 'required|max:255']);
+        $tag->name = $request->name;
+        $tag->save();
+        Session::flash('status', 'Successfully saved tag!');
+        return redirect()->route('tags.show', $tag->id);
     }
 
     /**
@@ -106,6 +107,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->articles()->detach();
+        $tag->delete();
+        Session::flash('status', 'Tag was deleted!!!');
+        return redirect()->route('tags.index');
     }
 }

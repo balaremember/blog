@@ -182,6 +182,7 @@ class ArticleController extends Controller
     {
             $user = Auth::user();
             $article = Article::find($id);
+            $article->tags()->detach();
 
             if($user->can('delete', $article))
             {
