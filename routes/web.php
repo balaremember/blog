@@ -32,3 +32,5 @@ Route::prefix('admin')->group(function () {
 Route::resource('articles', 'ArticleController');
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
 Route::resource('tags', 'TagController', ['except' => ['create']]);
+Route::resource('comments', 'CommentController', ['except' => ['create']]);
+// Route::post('comments/{article_id}', ['uses' => 'CommentController@store', 'as' => 'comments.store']);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Article;
+use App\Comment;
 
 class CommentController extends Controller
 {
@@ -32,9 +34,25 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $article_id)
     {
-        //
+        $this->validate($request, array(
+            'name'      =>  'required|max:255',
+            'email'     =>  'required|email|max:255',
+            'comment'   =>  'required|min:5|max:2000'
+        
+        ));
+
+        $user = Auth::user();
+        $article = Article::find($article_id);
+        $comment = new Comment();
+        $comment->article_id = $article_id;
+        $comment->user_id = $user->id;
+        $comment->body = $request->body;
+        $comment->article()->associate($article);
+        $comment->save();
+        Session::flash('status', 'Comment was added');
+        return redirect()->route('details.comments', [$article->id]);
     }
 
     /**

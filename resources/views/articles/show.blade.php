@@ -46,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-	
+<!-- 	
 	<div class="row">
 		<div class="col-md-12">
 			<h3 class="text-center">Comments</h3>
@@ -63,5 +63,5 @@
 				</p>
 			@endforeach
 		</div>
-	</div>
+	</div> -->
 @endsection
